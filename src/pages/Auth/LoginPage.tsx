@@ -15,15 +15,19 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { LoaderCircle } from "lucide-react";
 
 function LoginPage() {
   const [username, setUsername] = useState<String>("");
   const [password, setPassword] = useState<String>("");
+  const [animate, setAnimate] = useState<Boolean>(false);
+  const [error, setError] = useState<Boolean>(false);
   const navigate = useNavigate();
 
   const handleLogin = async (
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
+    setAnimate(true);
     e.preventDefault();
 
     const payload = {
@@ -40,15 +44,18 @@ function LoginPage() {
       });
 
       if (response.status === 200) {
-        const access = response.data.access;
+        const { access, role } = response.data;
         console.log(access);
         localStorage.setItem("token", access);
+        localStorage.setItem("role", role);
         setPassword("");
         setUsername("");
         navigate("/");
       }
     } catch (error) {
       console.error(error);
+      setAnimate(false);
+      setError(true);
     }
   };
   return (
@@ -99,6 +106,13 @@ function LoginPage() {
               </div>
             </div>
           </form>
+          {error ? (
+            <p className="text-sm font-light pt-1 text-red-700">
+              wrong credentials
+            </p>
+          ) : (
+            ""
+          )}
         </CardContent>
         <CardFooter className="flex-col gap-2">
           <Button
@@ -106,6 +120,7 @@ function LoginPage() {
             className="w-full cursor-pointer"
             form="loginForm"
           >
+            {animate ? <LoaderCircle className="animate-spin" /> : ""}
             Login
           </Button>
         </CardFooter>

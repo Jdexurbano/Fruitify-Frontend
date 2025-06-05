@@ -6,4 +6,5 @@ export type LoginInput = {
 export type Token = {
   access: string;
   refresh: string;
+  role: string;
 };

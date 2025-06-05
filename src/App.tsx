@@ -1,10 +1,13 @@
 import { Route, Routes } from "react-router";
 import MainLayout from "./shared/layouts/MainLayout";
 import LoginPage from "./pages/Auth/LoginPage";
+import MainPage from "./pages/Main/MainPage";
 function App() {
   return (
     <Routes>
-      <Route element={<MainLayout />}></Route>
+      <Route element={<MainLayout />}>
+        <Route index path="/" element={<MainPage />} />
+      </Route>
 
       {/* public routes */}
       <Route path="/login" element={<LoginPage />} />

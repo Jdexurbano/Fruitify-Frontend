@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useAuth } from "@/context/AuthContext";
 import type { Token } from "@/types/Auth/auth";
 import { URL } from "@/utils/constant";
 import React, { useState } from "react";
@@ -23,6 +24,7 @@ function LoginPage() {
   const [animate, setAnimate] = useState<Boolean>(false);
   const [error, setError] = useState<Boolean>(false);
   const navigate = useNavigate();
+  const { setToken } = useAuth();
 
   const handleLogin = async (
     e: React.FormEvent<HTMLFormElement>
@@ -45,6 +47,7 @@ function LoginPage() {
 
       if (response.status === 200) {
         const { access, role } = response.data;
+        setToken(access);
         console.log(access);
         localStorage.setItem("token", access);
         localStorage.setItem("role", role);

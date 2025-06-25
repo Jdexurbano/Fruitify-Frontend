@@ -6,6 +6,7 @@ import PublicRoutes from "./utils/PublicRoutes";
 import LoginPage from "./pages/Auth/LoginPage";
 import SignupPage from "./pages/Auth/SignupPage";
 import MainPage from "./pages/Main/MainPage";
+import BuyProductPage from "./pages/Main/BuyProductPage";
 function App() {
   return (
     <AuthProvider>
@@ -13,6 +14,7 @@ function App() {
         <Route element={<PrivateRoutes />}>
           <Route element={<MainLayout />}>
             <Route index path="/" element={<MainPage />} />
+            <Route index path="/buy/:id" element={<BuyProductPage />} />
           </Route>
         </Route>
         {/* public routes */}

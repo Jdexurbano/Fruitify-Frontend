@@ -6,3 +6,12 @@ export type ProductTypes = {
   price: number;
   stock: number;
 };
+
+//props type for buying products
+
+export type BuyProductProps = {
+  product: number;
+  quantity: number;
+  price: number;
+  product_name: string;
+};

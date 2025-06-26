@@ -9,16 +9,17 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { useNavigate } from "react-router";
 
 const items = [
   {
     title: "Home",
-    url: "#",
+    url: "/",
     icon: Home,
   },
   {
-    title: "Inbox",
-    url: "#",
+    title: "Orders",
+    url: "/orders/",
     icon: Inbox,
   },
   {
@@ -39,6 +40,10 @@ const items = [
 ];
 
 function AppSidebar() {
+  const navigate = useNavigate();
+
+  //function to handle navigation to the other pages
+  const handleNavigate = (url: string) => navigate(url);
   return (
     <Sidebar>
       <SidebarContent>
@@ -48,8 +53,8 @@ function AppSidebar() {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                  <SidebarMenuButton asChild className="cursor-pointer">
+                    <a onClick={() => handleNavigate(item.url)}>
                       <item.icon />
                       <span>{item.title}</span>
                     </a>

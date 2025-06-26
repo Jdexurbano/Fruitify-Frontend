@@ -15,3 +15,12 @@ export type BuyProductProps = {
   price: number;
   product_name: string;
 };
+
+//types for the orders
+export type OrdersTypes = {
+  id: number;
+  product: ProductTypes;
+  quantity: number;
+  price: number;
+  status: string;
+};
